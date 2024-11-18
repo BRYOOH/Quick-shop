@@ -5,12 +5,14 @@ import cart from '../assets/cart.png'
 
 const Navbar = () => {
   return (
-    <div className='flex pb-3  bg-purple-400 p-3'>
+    <div className='flex pb-3 flex-wrap bg-purple-500 p-3'>
       <div className='flex flex-[1] gap-5 items-center '>
         <img src={logo} alt='' className='w-[50px] h-[50px] object-contain rounded-[50%]'/>
-        <Link to='/' > QUICK SHOP</Link>
+        <Link to='/'
+        className=' text-header font-bold underline text-[25px]'
+        > QUICK SHOP</Link>
       </div>
-      <div className='flex flex-[1] uppercase gap-10 items-center justify-around text-[20px] font-medium'>
+      <div className='md:flex hidden flex-[1] uppercase gap-10 items-center justify-around text-[20px] font-medium'>
         <Link to='/ladies'>
         Ladies
         </Link>
@@ -22,8 +24,10 @@ const Navbar = () => {
         </Link>
       </div>
       <div className='flex flex-[1]  flex-end items-center justify-around'>
-        <img src={cart} alt="" className='w-[50px] h-[50px] object-contain rounded-[50%]'/>
-        <button className='bg-pink-700 px-6 py-4 text-white rounded-[10px]'>Logout</button>
+        <Link to='/cart'> 
+        <img src={cart} alt="" className='w-[40px] h-[40px] object-contain rounded-[50%]'/>
+        </Link>
+        <button className='bg-tertiary px-6 py-4 text-white rounded-[10px]'>Logout</button>
       </div>
     </div>
   )

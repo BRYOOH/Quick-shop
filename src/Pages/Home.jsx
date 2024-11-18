@@ -3,16 +3,15 @@ import Bio from '../Components/Bio'
 import NewCollections from '../Components/NewCollections'
 import Offers from '../Components/Offers'
 import PopularCollections from '../Components/PopularCollections'
-import Footer from '../Components/Footer'
+
 
 const Home = () => {
   return (
-    <div className='w-full bg-purple-500 '>
+    <div className=' h-full flex flex-wrap items-center justify-center gap-5 '>
       <Bio/>
       <NewCollections/>
       <Offers/>
       <PopularCollections/>
-      <Footer/>
     </div>
   )
 }

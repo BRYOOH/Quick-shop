@@ -10,6 +10,7 @@ export  const newcollections = [
         image:bluedress,
         oldPrice:20.50,
         newPrice:18.99,
+        category:'ladies',
     
     },
     {
@@ -18,6 +19,7 @@ export  const newcollections = [
         image:bluesuit,
         oldPrice:20.50,
         newPrice:18.99,
+        category:'gents',
     
     },
     {
@@ -26,6 +28,7 @@ export  const newcollections = [
         image:african,
         oldPrice:20.50,
         newPrice:18.99,
+        category:'ladies',
     
     },
     {
@@ -34,6 +37,7 @@ export  const newcollections = [
         image:baggy,
         oldPrice:20.50,
         newPrice:18.99,
+        category:'teens',
     
     },
  ];

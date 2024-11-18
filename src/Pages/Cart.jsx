@@ -1,8 +1,12 @@
-import React from 'react'
+import Cartitems from '../Components/Cartitems';
+
 
 const Cart = () => {
+
   return (
-    <div>Cart</div>
+   <div className='h-full items-center justify-center m-4'>
+    <Cartitems/>
+   </div>
   )
 }
 
