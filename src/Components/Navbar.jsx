@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.jpg'
 import cart from '../assets/cart.png'
+import { ClothingContext } from './Context/ClothingContext'
+import {  MenuOutlined } from '@mui/icons-material'
+
 
 const Navbar = () => {
+
+  const {cartIncre} = useContext(ClothingContext);
+
   return (
-    <div className='flex pb-3 flex-wrap bg-purple-500 p-3'>
-      <div className='flex flex-[1] gap-5 items-center '>
+    <div className='flex pb-3 gap-3 w-full md:flex-wrap justify-around bg-purple-500 p-3'>
+      <div className='flex md:flex-[1] md:gap-5 items-center '>
         <img src={logo} alt='' className='w-[50px] h-[50px] object-contain rounded-[50%]'/>
         <Link to='/'
-        className=' text-header font-bold underline text-[25px]'
+        className=' text-header font-bold italic text-[25px]'
         > QUICK SHOP</Link>
       </div>
-      <div className='md:flex hidden flex-[1] uppercase gap-10 items-center justify-around text-[20px] font-medium'>
+      <div className='md:flex hidden md:flex-[1] uppercase gap-10 items-center justify-around text-[20px] font-medium'>
         <Link to='/ladies'>
         Ladies
         </Link>
@@ -23,11 +29,18 @@ const Navbar = () => {
         Teens
         </Link>
       </div>
-      <div className='flex flex-[1]  flex-end items-center justify-around'>
+      <div className='flex md:flex-[1] items-center justify-around'>
+        <button className='bg-tertiary md:flex hidden md:px-6 px-4 py-4 text-white rounded-[10px]'>Logout</button>
         <Link to='/cart'> 
+        <div className='flex justify-center '>
         <img src={cart} alt="" className='w-[40px] h-[40px] object-contain rounded-[50%]'/>
+        <div className='px-2 items-center bg-red-600 rounded-[50%] h-6  w-6'>{cartIncre()}</div>
+        </div>
         </Link>
-        <button className='bg-tertiary px-6 py-4 text-white rounded-[10px]'>Logout</button>
+        <div className='md:hidden '
+        >
+        <MenuOutlined fontSize='large'/>
+       </div>
       </div>
     </div>
   )

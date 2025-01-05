@@ -4,8 +4,6 @@ import { ClothingContext } from './Context/ClothingContext';
 const ProductDisplay = (props) => {
 
    const {product} = props;
-  console.log(product);
-
   const {addToCart} = useContext(ClothingContext);
   
   return (
@@ -20,15 +18,15 @@ const ProductDisplay = (props) => {
         <img src={product.image} alt="" className='md:h-[600px] h-[300px] w-[450px] object-contain' />
       </div>
       <div 
-      className='flex flex-[1] h-[90vh]  justify-around  p-2 md:m-4 gap-5 flex-col m-2 rounded-[10px]'>
+      className='flex flex-[1] h-[90vh] w-full justify-around  p-2 md:m-4 gap-5 flex-col m-2 rounded-[10px]'>
         <h1 className=' text-[30px] font-extrabold uppercase text-teal-500'>{product.name}</h1> 
         <div className='flex flex-col xl:w-[75vh] sm:w-fit gap-5'>
-          <h1 className='text-[20px] ' >This is a demo description for reach products information about size and color blh blah blah</h1>
-        <p className='text-[20px]  font-bold'>Category : 
-        <span className='text-[20px] uppercase'> {product.category} </span></p>
-        <div className='text-[26px] flex justify-between w-[50vh]'>
-          <p className='line-through font-extrabold text-teal-400 italic'>${product.oldPrice}</p>
-          <p className='font-extrabold text-teal-400 italic'>${product.newPrice}</p>
+          <h1 className='md:text-[20px] text-[12px] ' >This is a demo description for reach products information about size and color blh blah blah</h1>
+        <p className='md:text-[20px] text-[12px]  font-bold'>Category : 
+        <span className='md:text-[20px] text-[12px] uppercase'> {product.category} </span></p>
+        <div className='md:text-[20px] text-[12px] flex justify-between md:w-[50vh] w-full'>
+          <p className='line-through font-extrabold md:text-[20px] text-[12px] text-teal-400 italic'>${product.oldPrice}</p>
+          <p className='font-extrabold md:text-[20px] text-[12px] text-teal-400 italic'>${product.newPrice}</p>
           </div>
         </div>
         <div className='gap-10'>
@@ -43,7 +41,9 @@ const ProductDisplay = (props) => {
         </div>
         <div className='flex flex-col justify-center gap-5 font-bold'>
         <button 
-        onClick={()=>{addToCart(product.id)}}
+        onClick={()=>{
+          addToCart(product.id);
+        }}
         className='px-6 py-3 bg-tertiary rounded-[10px] w-[250px]'>Add to cart</button>
         </div>
       </div>

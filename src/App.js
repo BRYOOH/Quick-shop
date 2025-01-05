@@ -6,6 +6,8 @@ import Navbar from './Components/Navbar'
 import Product from './Pages/Product'
 import Cart from './Pages/Cart'
 import Footer from './Components/Footer'
+import Signup from './Pages/Signup'
+import Login from './Pages/Login'
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
         <Route path=':productId' element={<Product/>}/>
         </Route>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/signup' element={<Signup/>}/>
       </Routes>
       <Footer/>
       </BrowserRouter>

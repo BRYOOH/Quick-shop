@@ -35,14 +35,25 @@ const ClothingContextProvider = (props) => {
             let itemsInfo = allProducts.find((e)=>e.id===item);
             totalPrice = (itemsInfo.newPrice * cartItems[item]) + totalPrice;
         }
-        console.log(totalPrice);
        }
-       return totalPrice;
+       const finalPrice = parseFloat(totalPrice.toFixed(2));
+       return finalPrice;
 
        
     }
 
-    const contextValue = {cartItems,removeFromCart,addToCart,sumCartItems};
+    const cartIncre = () =>{
+        let cartNo= 0;
+
+        for(const item in cartItems){
+            if(cartItems[item]>0){
+                cartNo= cartItems[[item]] + cartNo
+            }
+        }
+        return cartNo;
+    }
+
+    const contextValue = {cartItems,cartIncre,removeFromCart,addToCart,sumCartItems};
 
     return(
         <ClothingContext.Provider value={contextValue}>
