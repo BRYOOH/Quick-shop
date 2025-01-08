@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.jpg'
 import cart from '../assets/cart.png'
 import { ClothingContext } from './Context/ClothingContext'
@@ -7,7 +7,7 @@ import {  MenuOutlined } from '@mui/icons-material'
 
 
 const Navbar = () => {
-
+  const navigate = useNavigate();
   const {cartIncre} = useContext(ClothingContext);
 
   return (
@@ -30,7 +30,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div className='flex md:flex-[1] items-center justify-around'>
-        <button className='bg-tertiary md:flex hidden md:px-6 px-4 py-4 text-white rounded-[10px]'>Logout</button>
+        <button 
+        onClick={()=>{navigate('/login');localStorage.removeItem("auth-token");}}
+        className='bg-tertiary md:flex hidden md:px-6 px-4 py-4 text-white rounded-[10px]'>Logout</button>
         <Link to='/cart'> 
         <div className='flex justify-center '>
         <img src={cart} alt="" className='w-[40px] h-[40px] object-contain rounded-[50%]'/>

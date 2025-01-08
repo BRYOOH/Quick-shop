@@ -1,11 +1,45 @@
-import React from 'react'
-import Signup from './Signup'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { UserLogin } from '../API';
 
 const Login = () => {
 
   const navigate= useNavigate();
+  const [formData, setFormData] = useState({
+    email:"",
+    password:"",
+  });
   
+  const changeHandler = (e)=>{
+    setFormData({...formData,[e.target.name]:e.target.value})
+  };
+
+  const validateInputs = ()=>{
+    if(!formData.email || !formData.password){
+      alert("Please input all fields");
+      return false;
+    }
+    return true;
+  };
+
+  const login = async()=>{
+
+    if(validateInputs()){
+      try{
+        const response = await UserLogin(formData);
+        if(response && response.data){
+          alert("User Login successiful");
+          localStorage.setItem('auth-token',response.data.token);
+          navigate('/');
+        }
+      }catch(err){
+        alert(err.response.data.message)
+        console.log(err);
+      }
+    }
+    };
+    
+
   return (
     <div className='md:p-24 p-6 w-full xl:h-full md:h-screen h-[915px] mb-4'>
       <div className='flex border md:h-[70vh] h-fit p-2 md:flex-row flex-col border-white/50 rounded-xl gap-4'>
@@ -18,14 +52,13 @@ const Login = () => {
           <p className='text-2xl'>Enter your credentials below</p>
           </div>
         <div className='flex flex-col gap-3 items-center  text-black'>
-          <input type="email" placeholder='Email' 
-          className='px-6 py-3 rounded-2xl xl:w-[70vh] md:w-[40vh] w-[280px] outline-none'/>
-          <input type="password" placeholder="Password" 
-          className='px-6 py-3 rounded-2xl xl:w-[70vh] md:w-[40vh] w-[280px] outline-none'/>
+          <input type="email" placeholder='Email' name='email' value={formData.email}
+         onChange={changeHandler} className='px-6 py-3 rounded-2xl xl:w-[70vh] md:w-[40vh] w-[280px] outline-none'/>
+          <input type="password" placeholder="Password" name='password' value={formData.password}
+         onChange={changeHandler} className='px-6 py-3 rounded-2xl xl:w-[70vh] md:w-[40vh] w-[280px] outline-none'/>
         </div>
-        <button onClick="" 
+        <button onClick={login} 
         className='bg-tertiary px-4 py-3 xl:w-[30vh] w-[15vh] rounded-full'>Login</button>
-
         <p className=''>Dont have an account? <span className='text-pink-600 underline cursor-pointer' 
         onClick={()=>navigate("/signup")}>signup here</span></p>
       </div>

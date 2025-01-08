@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { allProducts } from "../data/allProducts";
+import { AddToCart } from "../../API";
 
 export const ClothingContext = createContext(null);
 
@@ -17,9 +18,24 @@ let getCartDefault = () =>{
 const ClothingContextProvider = (props) => {
 
     const [cartItems,setCartItem] = useState(getCartDefault());
-
-    const addToCart = (productId) =>{
-        setCartItem((prev)=>({...prev,[productId]:prev[productId]+1}))    
+    
+    const addToCart =async() =>{
+        try {
+            const token = localStorage.getItem("auth-token");
+            if (!token) {
+                throw new Error('User is not authenticated');
+            }
+            const response = await AddToCart(token);
+            if(response && response.data){
+                    alert("Item has been added");
+                    console.log(response);
+                }
+                return response; 
+            }
+         catch (error) {
+            alert(error.response.data.message);
+        }
+        
     }
 
     const removeFromCart = (productId) =>{

@@ -1,18 +1,18 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL:"http://localhost:4000/",
+    baseURL:"http://localhost:4000",
 });
 
-export const UserLogin = async(data)=>{API.post('/login',data)};
-export const UserSignUp = async(data)=>{API.post('/signup',data)};
-export const addToCart = async(token)=>{
+export const UserLogin = async(data)=> API.post('/login',data);
+export const UserSignUp = async(data)=>API.post('/signup',data);
+export const AddToCart = async(token)=>{
     API.post('/addtocart',{headers:{Authorization:token}})
 };
-export const removeFromCart = async(token)=>{
+export const RemoveFromCart = async(token)=>{
     API.post('/removefromcart',{headers:{Authorization:token}})
 };
-export const getCart= async(token)=>{
+export const GetCart= async(token)=>{
     API.get('/getCart',{headers:{Authorization:token}})
 };
 

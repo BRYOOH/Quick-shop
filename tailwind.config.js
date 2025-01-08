@@ -16,6 +16,7 @@ module.exports = {
         'promobg':"url('/src/assets/promo.avif')",
         'biobg':"url('/src/assets/biobg.png')",
         'loginbg':"url('/src/assets/loginbg.jpeg')",
+        'signupBg':"url('/src/assets/signupBg.jpeg')",
       },
       fontFamily:{
         'default':["Inconsolata"],
