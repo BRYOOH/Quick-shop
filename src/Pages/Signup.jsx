@@ -29,7 +29,7 @@ const Signup = () => {
      const response= await UserSignUp(formData);
      if(response && response.data){
       alert("User successifully created an account");
-      localStorage.setItem("auth-token",response.data.token);
+      localStorage.setItem("auth-token",token);
       navigate('/login');
      }
     }
@@ -42,7 +42,7 @@ const Signup = () => {
 
   return (
     <div className='md:p-24 p-8 w-full xl:h-full md:h-screen h-[915px] mb-4 '>
-      <div className='flex border md:h-[70vh] h-fit p-2 xl:flex-row-reverse flex-col border-white/50 rounded-xl gap-4'>
+      <div className='flex border md:h-[70vh] h-fit p-2 xl:flex-row-reverse flex-col border-black/50 rounded-xl gap-4'>
       <div className='flex-1 bg-signupBg rounded-xl text-black/70 md:bg-auto bg-cover text-right font-bold text-6xl flex items-center'>
        Signup to join, and Let's get started
       </div>
@@ -51,7 +51,7 @@ const Signup = () => {
           <h1 className='uppercase md:text-6xl text-xl font-semibold text-tertiary'>Signup</h1>
           <p className='text-2xl'>Enter your credentials below</p>
           </div>
-        <div className='flex flex-col gap-3 items-center  text-black'>
+        <div className='flex flex-col gap-3 items-center  text-text'>
           <input type="email" placeholder='Email' name='email' value={formData.email} 
            onChange={handleChange} className='px-6 py-3 rounded-2xl xl:w-[70vh] md:w-[40vh] w-[280px] outline-none'/>
            <input type="text" placeholder='Username' name='username' value={formData.username}

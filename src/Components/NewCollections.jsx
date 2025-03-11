@@ -4,7 +4,7 @@ import Item from './Item'
 
 const NewCollections = () => {
   return (
-    <div className='h-full w-full bg-purple-500 rounded-[10px] m-5  flex flex-col p-4 justify-center'>
+    <div className='h-full w-full bg-card rounded-[10px] m-5  flex flex-col p-4 justify-center'>
       <div className='flex flex-col justify-center items-center'> 
         <h1 className='text-[40px] font-bold text-header'>NEW COLLECTIONS  </h1>
         <hr className='w-[200px] h-[3px] '/>

@@ -7,5 +7,20 @@
    html,body{
     height: 100%;
     width: 100%;
-   };
+   }
+}
+
+.light{
+   --background: #FFFFFF;
+   --tertiary:#ff4ac1;
+   --header:#4ee4e4;
+   --card:#a3a3a3;
+   --text:#000;
+}
+.dark{
+   --background: #6b7280;
+   --tertiary:#ff4ac1;
+   --header:#4ee4e4;
+   --card:#374151;
+   --text:#FFF;
 }

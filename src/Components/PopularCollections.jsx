@@ -4,7 +4,7 @@ import Item from './Item'
 
 const PopularCollections = () => {
   return (
-    <div className='p-4  h-full w-full bg-purple-500 rounded-[10px] m-5 justify-center flex flex-col '>
+    <div className='p-4  h-full w-full bg-card rounded-[10px] m-5 justify-center flex flex-col '>
       <div className='flex items-center flex-col'>
       <h1 className='text-[40px] font-bold text-header'>OFFERS</h1>
       <hr className='w-[50px] h-[10px] '/>

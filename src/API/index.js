@@ -4,10 +4,13 @@ const API = axios.create({
     baseURL:"http://localhost:4000",
 });
 
+
 export const UserLogin = async(data)=> API.post('/login',data);
 export const UserSignUp = async(data)=>API.post('/signup',data);
 export const AddToCart = async(token)=>{
-    API.post('/addtocart',{headers:{Authorization:token}})
+    API.post('/addtocart',{headers:{ Accept: 'application/form-data',
+        Authorization:token, 'Content-Type' : 'application/json',
+    }})
 };
 export const RemoveFromCart = async(token)=>{
     API.post('/removefromcart',{headers:{Authorization:token}})

@@ -7,8 +7,8 @@ const ProductDisplay = (props) => {
   const {addToCart} = useContext(ClothingContext);
   
   return (
-    <div className='flex p-4   bg-purple-500 m-4 rounded-[10px] xl:flex-row h-full flex-col items-center'>
-      <div className='flex flex-[1] md:gap-10 gap-2 items-center md:m-4  m-2 p-2 rounded-[10px] bg-purple-500'>
+    <div className='flex p-4 bg-card m-4 rounded-[10px] xl:flex-row h-full flex-col items-center'>
+      <div className='flex flex-[1] md:gap-10 gap-2 items-center md:m-4  m-2 p-2 rounded-[10px] bg-gray-500'>
         <div className='xl:flex hidden flex-col gap-5'>
         <img src={product.image} alt="" className='h-[120px] w-[100px] rounded-[10px] object-cover ' />
         <img src={product.image} alt="" className='h-[130px] w-[100px] rounded-[10px] object-cover '/>
@@ -19,14 +19,14 @@ const ProductDisplay = (props) => {
       </div>
       <div 
       className='flex flex-[1] h-[90vh] w-full justify-around  p-2 md:m-4 gap-5 flex-col m-2 rounded-[10px]'>
-        <h1 className=' text-[30px] font-extrabold uppercase text-teal-500'>{product.name}</h1> 
+        <h1 className=' text-[30px] font-extrabold uppercase text-header'>{product.name}</h1> 
         <div className='flex flex-col xl:w-[75vh] sm:w-fit gap-5'>
           <h1 className='md:text-[20px] text-[12px] ' >This is a demo description for reach products information about size and color blh blah blah</h1>
         <p className='md:text-[20px] text-[12px]  font-bold'>Category : 
         <span className='md:text-[20px] text-[12px] uppercase'> {product.category} </span></p>
         <div className='md:text-[20px] text-[12px] flex justify-between md:w-[50vh] w-full'>
-          <p className='line-through font-extrabold md:text-[20px] text-[12px] text-teal-400 italic'>${product.oldPrice}</p>
-          <p className='font-extrabold md:text-[20px] text-[12px] text-teal-400 italic'>${product.newPrice}</p>
+          <p className='line-through font-extrabold md:text-[20px] text-[12px] text-header italic'>${product.oldPrice}</p>
+          <p className='font-extrabold md:text-[20px] text-[12px] text-header italic'>${product.newPrice}</p>
           </div>
         </div>
         <div className='gap-10'>

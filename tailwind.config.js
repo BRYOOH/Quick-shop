@@ -5,16 +5,19 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'bgColor': '#b182e3',
-        'tertiary': '#ff4ac1',
-        'header':'#4ee4e4'
+        'bgColor': 'var(--background)',
+        'tertiary': 'var(--tertiary)',
+        'header':'var(--header)',
+        'card':"var(--card)",
+        'text' :'var(--text)',
+        
       },
       gridTemplateColumns:{ 
         'cart':'4fr 3fr 1fr 1fr 1fr 1fr',
       },
       backgroundImage:{
         'promobg':"url('/src/assets/promo.avif')",
-        'biobg':"url('/src/assets/biobg.png')",
+        'biobg':"url('/src/assets/bgBio.jpg')",
         'loginbg':"url('/src/assets/loginbg.jpeg')",
         'signupBg':"url('/src/assets/signupBg.jpeg')",
       },

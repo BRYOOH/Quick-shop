@@ -42,7 +42,7 @@ const Login = () => {
 
   return (
     <div className='md:p-24 p-6 w-full xl:h-full md:h-screen h-[915px] mb-4'>
-      <div className='flex border md:h-[70vh] h-fit p-2 md:flex-row flex-col border-white/50 rounded-xl gap-4'>
+      <div className='flex border md:h-[70vh] h-fit p-2 md:flex-row flex-col border-black/50 rounded-xl gap-4'>
       <div className='flex-1 bg-loginbg rounded-xl md:bg-auto bg-cover font-bold text-6xl flex items-center'>
       Welcome to QuickShop. Let's Shop
       </div>
@@ -51,7 +51,7 @@ const Login = () => {
           <h1 className='uppercase md:text-6xl text-xl font-semibold text-tertiary'>LogIn</h1>
           <p className='text-2xl'>Enter your credentials below</p>
           </div>
-        <div className='flex flex-col gap-3 items-center  text-black'>
+        <div className='flex flex-col gap-3 items-center  text-text'>
           <input type="email" placeholder='Email' name='email' value={formData.email}
          onChange={changeHandler} className='px-6 py-3 rounded-2xl xl:w-[70vh] md:w-[40vh] w-[280px] outline-none'/>
           <input type="password" placeholder="Password" name='password' value={formData.password}

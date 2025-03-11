@@ -10,7 +10,7 @@ const Cartitems = () => {
   const {cartItems,removeFromCart,sumCartItems} = useContext(ClothingContext);
 
   return (
-    <div className='flex w-full xl:min-h-full min-h-[1300px] flex-col p-4 bg-purple-600  rounded-[10px] '>
+    <div className='flex w-full xl:min-h-full min-h-[1300px] flex-col p-4 bg-bgColor  rounded-[10px] '>
     <div 
     className='grid xl:text-[18px] text-[14px]  xl:grid-cols-cart grid-cols-5 items-center p-2 xl:w-[1200px] w-full rounded-[10px]'>
         <p>Products</p>
@@ -76,7 +76,7 @@ const Cartitems = () => {
           </div>
           <div className='max-w-[350px] flex gap-2'>
           <input type="text" placeholder='Enter your promo code here'  
-         className='px-6 py-2 bg-purple-200 rounded-[10px] outline-none text-black'/>
+         className='px-6 py-2 bg-purple-200 rounded-[10px] outline-none text-text'/>
          <button className='px-6 sm:px-2 py-2 bg-tertiary rounded-[10px]'>
           Enter
          </button>

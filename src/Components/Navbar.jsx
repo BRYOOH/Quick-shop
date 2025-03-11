@@ -1,17 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../assets/logo.jpg'
 import cart from '../assets/cart.png'
 import { ClothingContext } from './Context/ClothingContext'
 import {  MenuOutlined } from '@mui/icons-material'
+import moon from "../assets/moon.svg"
+import sun from "../assets/sun.svg"
+import { twMerge } from 'tailwind-merge'
 
 
-const Navbar = () => {
+const Navbar = ({darkMode,toggleDark}) => {
+
   const navigate = useNavigate();
   const {cartIncre} = useContext(ClothingContext);
 
   return (
-    <div className='flex pb-3 gap-3 w-full md:flex-wrap justify-around bg-purple-500 p-3'>
+    <div className='flex pb-3 gap-3 w-full md:flex-wrap justify-around bg-gray-700 p-3'>
       <div className='flex md:flex-[1] md:gap-5 items-center '>
         <img src={logo} alt='' className='w-[50px] h-[50px] object-contain rounded-[50%]'/>
         <Link to='/'
@@ -29,10 +33,16 @@ const Navbar = () => {
         Teens
         </Link>
       </div>
-      <div className='flex md:flex-[1] items-center justify-around'>
+      <div className='flex md:flex-[1] items-center gap-2 justify-around'>
         <button 
         onClick={()=>{navigate('/login');localStorage.removeItem("auth-token");}}
         className='bg-tertiary md:flex hidden md:px-6 px-4 py-4 text-white rounded-[10px]'>Logout</button>
+        <div className=''>
+        <img src={moon} alt="" 
+        className={twMerge("text-white",darkMode && 'hidden')}  onClick={toggleDark}/>
+        <img src={sun} alt="" 
+        className={twMerge(!darkMode && 'hidden')}  onClick={toggleDark}/>
+        </div>
         <Link to='/cart'> 
         <div className='flex justify-center '>
         <img src={cart} alt="" className='w-[40px] h-[40px] object-contain rounded-[50%]'/>
