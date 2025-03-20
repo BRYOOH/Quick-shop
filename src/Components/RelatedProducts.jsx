@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Item from './Item';
-import { allProducts } from './data/allProducts';
-
+import { ClothingContext } from './Context/ClothingContext';
 
 const RelatedProducts = (props) => {
 
+  const {allProducts,getProducts} = useContext(ClothingContext);
   const {product} = props;
-  console.log(product);
-  
+
+useEffect(()=>{
+  allProducts();
+},[]);
   
 
   return (
@@ -18,14 +20,14 @@ const RelatedProducts = (props) => {
       </div>
      
       <div className='xl:grid xl:grid-cols-4 flex justify-center flex-wrap'>
-        {allProducts.map((item,i)=>{
+        {getProducts.map((item,i)=>{
            if(product.category === item.category){
             return <Item key={i}
             id={item.id}
             name={item.name}
             image={item.image}
-            oldPrice={item.oldPrice}
-            newPrice={item.newPrice}
+            oldPrice={item.old_price}
+            newPrice={item.new_price}
             category={item.category}
             />
            }

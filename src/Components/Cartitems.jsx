@@ -1,14 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import promocode from '../assets/promo.avif'
-import { allProducts } from './data/allProducts'
 import { ClothingContext } from './Context/ClothingContext';
 import { RemoveCircleOutline } from '@mui/icons-material';
 
-
 const Cartitems = () => {
 
-  const {cartItems,removeFromCart,sumCartItems} = useContext(ClothingContext);
-
+  const {cartItems,removeFromCart,sumCartItems,getProducts} = useContext(ClothingContext);
+ 
   return (
     <div className='flex w-full xl:min-h-full min-h-[1300px] flex-col p-4 bg-bgColor  rounded-[10px] '>
     <div 
@@ -22,18 +20,17 @@ const Cartitems = () => {
       </div>
       <hr className='xl:w-[1200px] w-[300px] md:hidden '/>
 
-      {allProducts.map((e,index)=>{
+      {getProducts.map((e,index)=>{
         if(cartItems[e.id]>0){
-          return <div>
+          return <div key={index}>
             <div
-            key={index}
             className='grid xl:grid-cols-cart grid-cols-5 xl:text-[18px] gap-5 text-[14px]  p-2 xl:w-[1200px] w-full  items-center'>
             <img src={e.image} alt=""
             className='w-[100px] h-[100px] object-contain' />
             <p>{e.name}</p>
-            <p>${e.newPrice}</p>
+            <p>${e.new_price}</p>
             <button className='w-[50px] h-[50px] bg-tertiary'>{cartItems[e.id]}</button>
-            <p>${e.newPrice*cartItems[e.id]}</p>
+            <p>${e.new_price*cartItems[e.id]}</p>
             <div 
             className='cursor-pointer'
             onClick={()=>{removeFromCart(e.id)}}>

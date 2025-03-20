@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserLogin } from '../API';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -16,7 +17,7 @@ const Login = () => {
 
   const validateInputs = ()=>{
     if(!formData.email || !formData.password){
-      alert("Please input all fields");
+      toast.warn("Please input all fields");
       return false;
     }
     return true;
@@ -28,12 +29,12 @@ const Login = () => {
       try{
         const response = await UserLogin(formData);
         if(response && response.data){
-          alert("User Login successiful");
+          toast.success("User Login successiful");
           localStorage.setItem('auth-token',response.data.token);
-          navigate('/');
+          navigate('/home');
         }
       }catch(err){
-        alert(err.response.data.message)
+        toast.error(err.response.data.message)
         console.log(err);
       }
     }
@@ -63,7 +64,6 @@ const Login = () => {
         onClick={()=>navigate("/signup")}>signup here</span></p>
       </div>
       </div>
-      
     </div>
   )
 }

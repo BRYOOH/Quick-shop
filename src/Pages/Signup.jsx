@@ -28,9 +28,14 @@ const Signup = () => {
   try {
      const response= await UserSignUp(formData);
      if(response && response.data){
+      const token = response.data.token
       alert("User successifully created an account");
-      localStorage.setItem("auth-token",token);
+      if(token){
+        localStorage.setItem("auth-token",token);
       navigate('/login');
+      }else{
+        alert('No token discovered in the user details')
+      }
      }
     }
    catch (err) {
@@ -62,7 +67,7 @@ const Signup = () => {
         <button onClick={signup} 
         className='bg-tertiary px-4 py-3 xl:w-[30vh] w-[15vh] rounded-full'>Login</button>
         <p className=''>Already have an account? <span className='text-pink-600 underline cursor-pointer' 
-        onClick={()=>navigate("/login")}>login here</span></p>
+        onClick={()=>navigate("/")}>login here</span></p>
       </div>
       </div>
       

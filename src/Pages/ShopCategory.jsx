@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import { ArrowDropDown } from '@mui/icons-material'
 import Item from '../Components/Item'
-import { allProducts } from '../Components/data/allProducts'
+import { ClothingContext } from '../Components/Context/ClothingContext'
 
 const ShopCategory = (props) => {
+
+ const {getProducts} = useContext(ClothingContext);
+  
   return (
     <div className='h-full p-4 flex flex-col flex-wrap'>
       <div className='flex items-center justify-center p-4'>
@@ -16,14 +19,14 @@ const ShopCategory = (props) => {
       </div>
       <div className='xl:grid grid-cols-4 flex flex-wrap bg-card items-center justify-around p-8 rounded-[10px]'>
         
-      {allProducts.map((product,id)=>{
+      {getProducts.map((product,id)=>{
         if(product.category==props.category)
         return <Item key={id}
         id={product.id}
         image={product.image}
         name = {product.name}
-        oldPrice ={product.oldPrice}
-        newPrice ={product.newPrice}
+        oldPrice ={product.old_price}
+        newPrice ={product.new_price}
         />
       })}
       </div>

@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import RelatedProducts from '../Components/RelatedProducts'
 import ProductDisplay from '../Components/ProductDisplay'
-import { allProducts } from '../Components/data/allProducts'
 import { useParams } from 'react-router-dom'
+
+import { ClothingContext } from '../Components/Context/ClothingContext'
 
 const Product = () => {
 
   const {productId} = useParams();
-  const product = allProducts.find((e)=>
-    e.id === productId
+  console.log("Params id", productId);
+  
+  const {getProducts} = useContext(ClothingContext);
+
+
+  let product = getProducts.find((e)=>
+    e.id === Number(productId)
   ); 
 
   return (

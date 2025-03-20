@@ -18,8 +18,8 @@ const Navbar = ({darkMode,toggleDark}) => {
     <div className='flex pb-3 gap-3 w-full md:flex-wrap justify-around bg-gray-700 p-3'>
       <div className='flex md:flex-[1] md:gap-5 items-center '>
         <img src={logo} alt='' className='w-[50px] h-[50px] object-contain rounded-[50%]'/>
-        <Link to='/'
-        className=' text-header font-bold italic text-[25px]'
+        <Link to='/home'
+        className=' text-header font-extrabold  text-[25px]'
         > QUICK SHOP</Link>
       </div>
       <div className='md:flex hidden md:flex-[1] uppercase gap-10 items-center justify-around text-[20px] font-medium'>
@@ -35,7 +35,7 @@ const Navbar = ({darkMode,toggleDark}) => {
       </div>
       <div className='flex md:flex-[1] items-center gap-2 justify-around'>
         <button 
-        onClick={()=>{navigate('/login');localStorage.removeItem("auth-token");}}
+        onClick={()=>{navigate('/');localStorage.removeItem("auth-token");}}
         className='bg-tertiary md:flex hidden md:px-6 px-4 py-4 text-white rounded-[10px]'>Logout</button>
         <div className=''>
         <img src={moon} alt="" 

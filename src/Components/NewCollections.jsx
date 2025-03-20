@@ -1,8 +1,11 @@
-import React from 'react'
-import {newcollections}  from './data/newcollection'
+import React, { useContext} from 'react'
 import Item from './Item'
+import { ClothingContext } from './Context/ClothingContext'
 
 const NewCollections = () => {
+
+  const {newCollections} =useContext(ClothingContext);
+
   return (
     <div className='h-full w-full bg-card rounded-[10px] m-5  flex flex-col p-4 justify-center'>
       <div className='flex flex-col justify-center items-center'> 
@@ -11,13 +14,13 @@ const NewCollections = () => {
       </div>
      
         <div className='gap-3 p-3 grid xl:grid-cols-4 grid-cols-2 '>
-        {newcollections.map((product,i)=>{
+        {newCollections.map((product,i)=>{
             return <Item key={i} 
             id={product.id}
             name={product.name}
             image={product.image}
-            newPrice= {product.newPrice}
-            oldPrice= {product.oldPrice}
+            newPrice= {product.new_price}
+            oldPrice= {product.old_price}
             />
         })}
         </div>

@@ -5,24 +5,69 @@ const API = axios.create({
 });
 
 
-export const UserLogin = async(data)=> API.post('/login',data);
-export const UserSignUp = async(data)=>API.post('/signup',data);
-export const AddToCart = async(token)=>{
-    API.post('/addtocart',{headers:{ Accept: 'application/form-data',
-        Authorization:token, 'Content-Type' : 'application/json',
-    }})
-};
-export const RemoveFromCart = async(token)=>{
-    API.post('/removefromcart',{headers:{Authorization:token}})
-};
-export const GetCart= async(token)=>{
-    API.get('/getCart',{headers:{Authorization:token}})
+export const UserLogin = async(data)=> await API.post('/login',data);
+export const UserSignUp = async(data)=>await API.post('/signup',data);
+
+export const AddToCart = async(token,itemId)=>{
+    if (!token) {
+        console.error("Authorization token missing");
+        return { errors: "Authorization token is required" };
+    }
+
+    try {
+       const response = await API.post('/addtocart',{itemId:itemId},{
+            headers:{ 
+            Accept: 'application/json',
+            Authorization:token, 
+           'Content-Type' : 'application/json',
+        }});
+        return response.data;
+    } catch (error) {
+        console.error("There was an error adding to the cart" + error);
+        return null;
+    } 
 };
 
-export const AddProduct = async(data)=>{API.post('/addproduct',data)};
-export const RemoveProduct = async(id)=>{
-    API.delete(`/removecart/:${id}`)
-}
-export const allProduct = async(data)=>{API.get('/allProducts',data)};
-export const newCollections = async(data)=>{API.get('/newcollections',data)};
-export const popularInWomen = async(data)=>{API.get('/popularinwomen',data)};
+export const RemoveFromCart = async(token,itemId)=>{
+    if (!token) {
+        console.error("Authorization token missing");
+        return { errors: "Authorization token is required" };
+    }
+    try {
+        const response = await API.post('/removefromcart',{itemId:itemId},{
+            headers:{
+               Accept:'application/json',
+               Authorization:token,
+               'Content-Type' :'application/json',
+           }});
+           return response.data;
+    } catch (error) {
+        console.error("Cannot reomove the product from cart " + error);
+        return null;
+    }
+   
+};
+
+export const GetCart= async(token)=>{
+    const response = await API.get('/getCart',{
+        headers:{
+            Accept: 'application/json',
+            Authorization:token,
+            'Content-Type': 'application/json',
+        }
+    });
+    return response.data;
+};
+
+export const AllProducts = async(data)=>{
+   const response = await API.get('/allProducts',data);
+   return response;
+};
+export const NewCollection = async(data)=>{
+    const response = await API.get('/newcollection',data);
+    return response;
+};
+export const PopularInWomen = async(data)=>{
+    const response = await API.get('/popularinwomen',data);
+    return response;
+};

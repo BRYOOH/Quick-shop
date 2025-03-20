@@ -3,7 +3,7 @@ import { ClothingContext } from './Context/ClothingContext';
 
 const ProductDisplay = (props) => {
 
-   const {product} = props;
+   let {product} = props;
   const {addToCart} = useContext(ClothingContext);
   
   return (
@@ -25,8 +25,8 @@ const ProductDisplay = (props) => {
         <p className='md:text-[20px] text-[12px]  font-bold'>Category : 
         <span className='md:text-[20px] text-[12px] uppercase'> {product.category} </span></p>
         <div className='md:text-[20px] text-[12px] flex justify-between md:w-[50vh] w-full'>
-          <p className='line-through font-extrabold md:text-[20px] text-[12px] text-header italic'>${product.oldPrice}</p>
-          <p className='font-extrabold md:text-[20px] text-[12px] text-header italic'>${product.newPrice}</p>
+          <p className='line-through font-extrabold md:text-[20px] text-[12px] text-header italic'>${product.old_price}</p>
+          <p className='font-extrabold md:text-[20px] text-[12px] text-header italic'>${product.new_price}</p>
           </div>
         </div>
         <div className='gap-10'>

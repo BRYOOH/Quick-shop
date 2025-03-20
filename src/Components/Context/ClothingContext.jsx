@@ -1,6 +1,6 @@
-import { createContext, useState } from "react";
-import { allProducts } from "../data/allProducts";
-import { AddToCart } from "../../API";
+import React, { createContext, useEffect, useState } from "react";
+import { AddToCart, AllProducts, GetCart, NewCollection, PopularInWomen, RemoveFromCart } from "../../API";
+import { toast } from "react-toastify";
 
 export const ClothingContext = createContext(null);
 
@@ -17,29 +17,107 @@ let getCartDefault = () =>{
 
 const ClothingContextProvider = (props) => {
 
-    const [cartItems,setCartItem] = useState(getCartDefault());
+const [cartItems,setCartItem] = useState(getCartDefault());
+const [getProducts, setGetProducts] = useState([]);
+const[newCollections, setNewCollections]= useState([]);
+const [getPopular, setGetPopular] = useState([]);
+
+    const allProducts = async(data)=>{
+        const response = await AllProducts(data);
+        if(response && response.data){
+        console.log("All products fetched successifully");
+        setGetProducts(response.data);
+        return response.data;
+        }else{
+        toast.error("An error occured while accessing the products")
+        }
+    }
     
-    const addToCart =async() =>{
+    const popularCollections=async(data)=>{
+        const response = await PopularInWomen(data);
+        if(response && response.data){
+        toast.success("Popular in women fetched");
+        setGetPopular(response.data);
+        return response.data;
+        }else{
+        toast.error("No data was found");
+        }
+    }
+
+    const GetNewCollections= async(data)=>{
+        const response = await NewCollection(data);
+        if(response && response.data){
+        toast.success("New collections fetched");
+        setNewCollections(response.data);
+        }
+    }
+
+    const fetchCart = async()=>{
+        try {
+            const token = localStorage.getItem("auth-token");
+            if(!token){
+                toast.warn('User is not authenticated');
+                return null;
+            }
+            const response = await GetCart(token);
+            console.log("GetCartData",response);
+            if(response){
+                console.log("CartData was fetched successifully");
+                setCartItem(response);
+                return response;
+            }
+        } catch (error) {
+            toast.error("There was an error loading the cart" + error);
+        }
+    };
+
+    useEffect(()=>{
+         popularCollections();
+         GetNewCollections();
+         allProducts();
+         fetchCart() ;
+    },[]);
+    
+    const addToCart =async(itemId) =>{
+
         try {
             const token = localStorage.getItem("auth-token");
             if (!token) {
-                throw new Error('User is not authenticated');
+                toast.warn('User is not authenticated');
+                return null;
             }
-            const response = await AddToCart(token);
-            if(response && response.data){
-                    alert("Item has been added");
-                    console.log(response);
+            const response = await AddToCart(token,itemId);
+            if(response){
+                    toast.success("Item has been added");
+                    console.log("Response",response);
+                    fetchCart();
                 }
                 return response; 
+                
             }
          catch (error) {
-            alert(error.response.data.message);
+            alert(error);
         }
-        
     }
 
-    const removeFromCart = (productId) =>{
-        setCartItem((prev)=>({...prev,[productId]:prev[productId]-1}))
+    const removeFromCart = async(itemId) =>{
+       try {
+        const token = localStorage.getItem('auth-token');
+        if(!token){
+            toast.error("User is not authenticated ");
+            return null;
+        }
+
+        const response = await RemoveFromCart(token,itemId);
+        if(response ){
+            toast.success("Item was removed from cart");
+            console.log('Response message', response);
+            fetchCart();
+        }
+        return response;
+       } catch (error) {
+            alert(error);
+       }
     }
 
     const sumCartItems = () =>{
@@ -48,8 +126,9 @@ const ClothingContextProvider = (props) => {
 
        for(const item in cartItems){
         if(cartItems[item]>0){
-            let itemsInfo = allProducts.find((e)=>e.id===item);
-            totalPrice = (itemsInfo.newPrice * cartItems[item]) + totalPrice;
+            let itemsInfo = getProducts.find((e)=>e.id===Number(item));
+            console.log("CartItemInfo", itemsInfo);
+            totalPrice = (itemsInfo.new_price * cartItems[item]) + totalPrice;
         }
        }
        const finalPrice = parseFloat(totalPrice.toFixed(2));
@@ -63,18 +142,19 @@ const ClothingContextProvider = (props) => {
 
         for(const item in cartItems){
             if(cartItems[item]>0){
-                cartNo= cartItems[[item]] + cartNo
+                cartNo= cartItems[item] + cartNo
             }
         }
         return cartNo;
     }
 
-    const contextValue = {cartItems,cartIncre,removeFromCart,addToCart,sumCartItems};
+    const contextValue = {cartItems,cartIncre,removeFromCart,addToCart,sumCartItems,allProducts,GetNewCollections,popularCollections,getPopular,newCollections,getProducts};
 
     return(
         <ClothingContext.Provider value={contextValue}>
             {props.children}
         </ClothingContext.Provider>
+        
     )
 }
 

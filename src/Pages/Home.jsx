@@ -7,7 +7,7 @@ import PopularCollections from '../Components/PopularCollections'
 
 const Home = () => {
   return (
-    <div className=' h-full flex flex-wrap items-center justify-center gap-5 '>
+    <div className=' h-full flex flex-wrap overflow-auto scrollbar-hide items-center justify-center gap-5 '>
       <Bio/>
       <NewCollections/>
       <Offers/>

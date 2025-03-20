@@ -12,6 +12,9 @@ import { twMerge } from 'tailwind-merge'
 import ladiesBanner from './assets/womenBanner.jpg'
 import gentsBanner from './assets/menBanner.jpg'
 import teensBanner from './assets/teensBanner.jpg'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
+
 
 const App = () => {
 
@@ -27,12 +30,12 @@ const App = () => {
   }, [darkMode]);
 
   return (
-    <div className={twMerge('h-full w-full text-text light bg-bgColor font-default', darkMode && 'dark')}>
+    <div className={twMerge('h-full w-full text-text light bg-bgColor font-default ', darkMode && 'dark')}>
       
       <BrowserRouter>
       <Navbar darkMode={darkMode} toggleDark={toggleDark}/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
+        <Route path='/home' element={<Home/>}/>
         <Route path='/ladies' element={<ShopCategory category='ladies' banner={ladiesBanner}/>}/>
         <Route path='/gents' element={<ShopCategory category='gents' banner={gentsBanner}/>}/>
         <Route path='/teens' element={<ShopCategory category='teens' banner={teensBanner}/>}/>
@@ -40,12 +43,14 @@ const App = () => {
         <Route path=':productId' element={<Product/>}/>
         </Route>
         <Route path='/cart' element={<Cart/>}/>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/' element={<Login/>}/>
         <Route path='/signup' element={<Signup/>}/>
       </Routes>
       <Footer/>
       </BrowserRouter>
+      <ToastContainer/>
     </div>
+    
   )
 }
 
