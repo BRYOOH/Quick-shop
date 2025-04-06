@@ -2,7 +2,11 @@ import axios from "axios";
 
 const API = axios.create({
     baseURL:"https://quickshop-backend-2vgd.onrender.com",
-    withCredentials: true 
+    withCredentials: true,
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 });
 
 
