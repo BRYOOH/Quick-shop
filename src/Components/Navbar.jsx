@@ -13,6 +13,7 @@ const Navbar = ({darkMode,toggleDark}) => {
 
   const navigate = useNavigate();
   const {cartIncre} = useContext(ClothingContext);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className='flex pb-3 gap-3 w-full md:flex-wrap justify-around bg-gray-700 p-3'>
@@ -49,9 +50,21 @@ const Navbar = ({darkMode,toggleDark}) => {
         <div className='px-2 items-center bg-red-600 rounded-[50%] h-6  w-6'>{cartIncre()}</div>
         </div>
         </Link>
-        <div className='md:hidden '
-        >
-        <MenuOutlined fontSize='large'/>
+        <div className='md:hidden relative flex items-center'>
+        <MenuOutlined fontSize='large' onClick={()=>setMenuOpen(!menuOpen)}/>
+          {menuOpen && (
+             <div className="md:hidden z-50 absolute top-10 right-0 items-center justify-center bg-card w-40 h-auto text-xl p-4 flex flex-col rounded-md gap-4">
+             <Link to='/ladies' onClick={()=>setMenuOpen(!menuOpen)}>
+             Ladies
+             </Link>
+             <Link to='/gents' onClick={()=>setMenuOpen(!menuOpen)}>
+             Gents
+             </Link>
+             <Link to='/teens' onClick={()=>setMenuOpen(!menuOpen)}>
+             Teens
+             </Link>
+             </div>
+          )}
        </div>
       </div>
     </div>

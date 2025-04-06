@@ -16,6 +16,7 @@
    --header:#4ee4e4;
    --card:#a3a3a3;
    --text:#000;
+   --input:#cfccd1;
 }
 .dark{
    --background: #6b7280;
@@ -23,4 +24,5 @@
    --header:#4ee4e4;
    --card:#374151;
    --text:#FFF;
+   --input:#f5eded;
 }

@@ -2,11 +2,56 @@ import React, { useContext, useEffect, useState } from 'react'
 import promocode from '../assets/promo.avif'
 import { ClothingContext } from './Context/ClothingContext';
 import { RemoveCircleOutline } from '@mui/icons-material';
+import { StkPush } from '../API';
+import { toast } from 'react-toastify';
 
 const Cartitems = () => {
 
-  const {cartItems,removeFromCart,sumCartItems,getProducts} = useContext(ClothingContext);
+  const {cartItems,removeFromCart,sumCartItems,getProducts,cartDelete} = useContext(ClothingContext);
+
+  const [formData,setFormData] = useState({
+    amount:sumCartItems(),
+    phoneNo:"",
+  }
+  );
+
+  const changeHandler=(e)=>{
+    setFormData({...formData,[e.target.name]:e.target.value});
+  }
+
+  useEffect(()=>{
+    setFormData({...formData, amount:sumCartItems()})
+  },[cartItems]);
+
+  const validateNo = () =>{
+    if(!formData.phoneNo){
+      toast.error("Please input your phoneNumber");
+      return false;
+    }
+    return true;
+  }
  
+    const MpesaStkPush = async()=>{
+      if(validateNo()){
+        try {
+          
+          const response = await StkPush(formData);
+          if(response && response.data){
+            toast.success("Purchase was successiful!!")
+            console.log(response.data);
+            cartDelete();
+            setFormData({
+              phoneNo:'',
+            });
+            return response.data;
+          }
+        } catch (error) {
+          toast.error("There was an error " + error);
+        }
+        
+      }
+    }
+
   return (
     <div className='flex w-full xl:min-h-full min-h-[1300px] flex-col p-4 bg-bgColor  rounded-[10px] '>
     <div 
@@ -42,7 +87,7 @@ const Cartitems = () => {
       })}
 
       <div className='flex items-center xl:flex-col md:flex-row flex-col justify-center h-[100vh] w-full p-4 '>
-        <div className='flex flex-[1] items-center w-[350px] flex-col p-2'>
+        <div className='flex flex-[1] items-center text-center w-[350px] flex-col p-2'>
 
         <div className='flex w-full p-2 items-end flex-row justify-around'>
           <h1 className='text-[22px] font-bold '>Sub total</h1>
@@ -58,13 +103,15 @@ const Cartitems = () => {
         
         <div className='flex w-full p-2 items-end flex-row justify-around'>
         <h1 className='text-[22px] font-bold '>Total</h1>
-          <h2 className='text-[24px] text-green-400 font-extrabold'>${sumCartItems()}</h2>
+          <h2 name='amount' className='text-[24px] text-green-400 font-extrabold'>${formData.amount}</h2>
         </div>
           <hr className='w-[400px]'/>
+
+            <input type="text" className='mt-4 rounded-md p-4 text-black text-xl border-none outline-none bg-input' name='phoneNo' value={formData.phoneNo} placeholder="Enter Phone Number" onChange={changeHandler} />
           <hr className='w-[400px]'/>
 
           <button 
-          className='px-4 py-2 bg-tertiary m-4 rounded-[10px]'>Check out</button>
+          className='px-4 py-2 bg-tertiary m-4 rounded-[10px]' onClick={MpesaStkPush}>Check out</button>
         </div>
 
         <div className='flex flex-[1] w-full overflow-hidden gap-4 flex-col-reverse p-2 bg-promobg rounded-[10px] object-cover'>

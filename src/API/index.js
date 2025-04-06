@@ -71,3 +71,7 @@ export const PopularInWomen = async(data)=>{
     const response = await API.get('/popularinwomen',data);
     return response;
 };
+export const StkPush = async(data)=>{
+    const response = await API.post('/stkpush',data);
+    return response;
+}

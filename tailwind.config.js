@@ -10,7 +10,7 @@ module.exports = {
         'header':'var(--header)',
         'card':"var(--card)",
         'text' :'var(--text)',
-        
+        'input':"var(--input)",
       },
       gridTemplateColumns:{ 
         'cart':'4fr 3fr 1fr 1fr 1fr 1fr',
