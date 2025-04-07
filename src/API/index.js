@@ -4,13 +4,14 @@ const API = axios.create({
     baseURL:"https://quickshop-backend-2vgd.onrender.com",
     withCredentials: true,
     headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
     }
 });
 
 
 export const UserLogin = async(data)=> await API.post('/login',data);
+
 export const UserSignUp = async(data)=>await API.post('/signup',data);
 
 export const AddToCart = async(token,itemId)=>{
